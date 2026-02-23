@@ -9,8 +9,9 @@ use App\Repository\TaskRepository; // no es necesario importar el modelo, pues e
 
 class TaskApiController extends AbstractController
 { //
-    #[Route('/mis-tareas/api')]
 
+    //dena ikusteko
+    #[Route('/mis-tareas/api/')]
     public function TaskList(TaskRepository $repository): Response // inyección de dependencias 
     {
         $tasks = $repository->findAll();
@@ -18,5 +19,15 @@ class TaskApiController extends AbstractController
         //     'mis_tareas' => $tasks
         // ]); //ESTO ES EL RESPONSE 
         return  $this->json($tasks);
+    }
+    //soilik bat ikusteko
+    #[Route('/mis-tareas/api/{id}')]
+    public function myTask($id, TaskRepository $repository): Response
+    {
+        $task = $repository->find($id);
+        if (!$task) {
+            throw $this->createNotFoundException('La tarea no existe');
+        }
+        return $this->json($task);
     }
 }

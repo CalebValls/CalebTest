@@ -13,4 +13,14 @@ class TaskRepository
             new Task(2, 'Compra', '3H')
         ];
     }
+
+public function find(int $id): ?Task // mira el id del task
+    {
+        foreach ($this->findAll() as $task) {// mira en todos
+            if ($task->getId() === $id) { // pero solo coge el que es igual
+                return $task;// lo devuelve
+            }
+        }
+        return null;
+    }
 }
