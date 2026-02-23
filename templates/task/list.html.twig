@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %} {# 1. Heredamos de la plantilla maestra #}
+
+{% block title %}Lista de Tareas de Caleb{% endblock %} {# Cambiamos el título de la pestaña #}
+
+{% block body %} {# 2. Rellenamos el hueco del body #}
+    <h1>Mis Tareas Pendientes</h1>
+
+    <ul>
+        {# 3. Hacemos un bucle para recorrer el array que nos manda el controlador #}
+        {% for tarea in mis_tareas %}
+            <li>
+                <strong>{{ tarea.name|upper}}</strong> - Tiempo estimado: {{ tarea.time }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
