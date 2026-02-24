@@ -2,26 +2,42 @@
 
 namespace App\Repository;
 
-use App\Model\task;
-use App\Model\TaskStatusEnum;
+use App\Entity\Task;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 
-class TaskRepository
+/**
+ * @extends ServiceEntityRepository<Task>
+ */
+class TaskRepository extends ServiceEntityRepository
 {
-    public function findAll(): array
+    public function __construct(ManagerRegistry $registry)
     {
-        return [
-            new Task(1, 'Limpieza', '2H',TaskStatusEnum::SIN_EMPEZAR),
-            new Task(2, 'Compra', '3H', TaskStatusEnum::EMPEZADA)
-        ];
+        parent::__construct($registry, Task::class);
     }
 
-    public function find(int $id): ?Task // mira el id del task
-    {
-        foreach ($this->findAll() as $task) { // mira en todos
-            if ($task->getId() === $id) { // pero solo coge el que es igual, usa getter del modelo
-                return $task; // lo devuelve
-            }
-        }
-        return null;
-    }
+//    /**
+//     * @return Task[] Returns an array of Task objects
+//     */
+//    public function findByExampleField($value): array
+//    {
+//        return $this->createQueryBuilder('t')
+//            ->andWhere('t.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->orderBy('t.id', 'ASC')
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
+
+//    public function findOneBySomeField($value): ?Task
+//    {
+//        return $this->createQueryBuilder('t')
+//            ->andWhere('t.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->getQuery()
+//            ->getOneOrNullResult()
+//        ;
+//    }
 }
