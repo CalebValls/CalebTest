@@ -9,6 +9,7 @@ class task
         private int $id,
         private string $name,
         private string $time,
+        private TaskStatusEnum $status,
     ) {}
     // GETTERS
     public function getId(): int
@@ -25,6 +26,10 @@ class task
     {
         return $this->time;
     }
+    public function getStatus(): TaskStatusEnum
+    {
+        return $this->status;
+    }
     //SETTERS
     public function setId(int $id): void
     {
@@ -39,5 +44,10 @@ class task
     public function setTime(string $time): void
     {
         $this->time = $time;
+    }
+
+    public function setStatus(TaskStatusEnum $status): void
+    {
+        $this->status = $status;
     }
 }

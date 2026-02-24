@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Lista de Tareas de Caleb{% endblock %} 
-{% block body %} 
-    <h1>Mis Tareas Pendientes</h1>
+{% block title %}Lista de Tareas{% endblock %}
 
+{% block body %}
+    <h1>Todas tus tareas</h1>
     <ul>
         {% for tarea in mis_tareas %}
             <li>
-                <strong>{{ tarea.name|upper}}</strong> - Tiempo estimado: {{ tarea.time }}
+                <a href="{{ path('app_task_show', { id: tarea.id }) }}">
+                    <strong>{{ tarea.name|upper }}</strong>
+                </a>
+                - Tiempo: {{ tarea.time }}
+				- EStado: {{ tarea.status.value}}
             </li>
         {% endfor %}
     </ul>

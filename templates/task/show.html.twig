@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tarea: {{ tarea.name }}{% endblock %}
+
+{% block body %}
+    <h1>Detalle de la Tarea</h1>
+    
+    <div class="detalle">
+        <p><strong>Nombre:</strong> {{ tarea.name }}</p>
+        <p><strong>Tiempo estimado:</strong> {{ tarea.time }}</p>
+        <p><strong>ID de registro:</strong> {{ tarea.id }}</p>
+        <p><strong>Estado:</strong> {{ tarea.status.value }}</p>
+    </div>
+
+    <hr>
+    <a href="{{ path('app_task_list') }}">Volver</a>
+{% endblock %}

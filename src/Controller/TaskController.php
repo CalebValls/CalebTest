@@ -9,7 +9,7 @@ use App\Repository\TaskRepository; // no es necesario importar el modelo, pues e
 
 class TaskController extends AbstractController
 { //
-    #[Route('/mis-tareas')]
+    #[Route('/mis-tareas', name: 'app_task_list', methods: ['GET'])]
 
     public function TaskList(TaskRepository $repository): Response // inyección de dependencias 
     {
@@ -18,4 +18,17 @@ class TaskController extends AbstractController
             'mis_tareas' => $tasks
         ]); //ESTO ES EL RESPONSE 
     }
+
+    #[Route('/mis-tareas/{id}', name: 'app_task_show', methods: ['GET'])]
+    public function get($id, TaskRepository $repository): Response
+    {
+        $task = $repository->find($id);
+        if (!$task) {
+            throw $this->createNotFoundException('La tarea no existe');
+        }
+        return $this->render('task/show.html.twig', [
+            'tarea' => $task
+        ]);
+    }
+
 }
